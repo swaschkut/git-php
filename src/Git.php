@@ -35,7 +35,8 @@
 		public function init($directory, array $params = NULL)
 		{
 			if (is_dir("$directory/.git")) {
-				throw new GitException("Repo already exists in $directory.");
+				#throw new GitException("Repo already exists in $directory.");
+                print "Reinitialized existing Git repository in $directory/.git/ \n";
 			}
 
 			if (!is_dir($directory) && !@mkdir($directory, 0777, TRUE)) { // intentionally @; not atomic; from Nette FW
