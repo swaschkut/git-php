@@ -1,3 +1,5 @@
 /vendor/
 /tests/tmp/
 /composer.lock
+.idea
+**/.DS_Store
