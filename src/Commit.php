@@ -111,11 +111,12 @@
 
 
 		/**
-		 * @return \DateTimeImmutable
+         * @return string
 		 */
-		public function getAuthorDate()
+		//* @return \DateTimeImmutable
+		public function getAuthorDate( $format = 'Y-m-d H:i:s' )
 		{
-			return $this->authorDate;
+			return $this->authorDate->format($format );
 		}
 
 
@@ -138,19 +139,21 @@
 
 
 		/**
-		 * @return \DateTimeImmutable
+         * @return string
 		 */
-		public function getCommitterDate()
+		//* @return \DateTimeImmutable
+		public function getCommitterDate( $format = 'Y-m-d H:i:s' )
 		{
-			return $this->committerDate;
+			return $this->committerDate->format($format );
 		}
 
 
 		/**
 		 * Alias for getAuthorDate()
-		 * @return \DateTimeImmutable
+         * * @return string
 		 */
-		public function getDate()
+		//* @return \DateTimeImmutable
+		public function getDate( $format = 'Y-m-d H:i:s' )
 		{
 			return $this->authorDate;
 		}
