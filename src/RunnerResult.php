@@ -84,6 +84,7 @@
 		public function getOutputLastLine()
 		{
 			$lastLine = end($this->output);
+            $lastLine = str_replace( '"', '', $lastLine );
 			return is_string($lastLine) ? $lastLine : NULL;
 		}
 
