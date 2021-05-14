@@ -336,9 +336,13 @@
 		 */
 		public function commit($message, $params = NULL)
 		{
-			$this->run('commit', $params, [
-				'-m' => $message,
-			]);
+            if( $this->hasChanges() )
+			    $this->run('commit', $params, [
+                    '-m' => $message,
+                ]);
+            else
+                print "nothing to commit, working tree clean\n";
+
 			return $this;
 		}
 
@@ -393,8 +397,10 @@
 			$authorName = rtrim($result->getOutputAsString());
 
 			// author date
-			$result = $this->run('log', '-1', $commitId, '--pretty="format:%ad"', '--date=iso-strict');
+			#$result = $this->run('log', '-1', $commitId, '--pretty="format:%ad"', '--date=iso-strict');
+            $result = $this->run('log', '-1', $commitId, '--pretty="%ad"', '--date=iso-strict');
 			$authorDate = \DateTimeImmutable::createFromFormat(\DateTime::ATOM, (string) $result->getOutputLastLine());
+
 
 			if (!($authorDate instanceof \DateTimeImmutable)) {
 				throw new GitException('Failed fetching of commit author date.', 0, NULL, $result);
@@ -409,7 +415,8 @@
 			$committerName = rtrim($result->getOutputAsString());
 
 			// committer date
-			$result = $this->run('log', '-1', $commitId, '--pretty="format:%cd"', '--date=iso-strict');
+			#$result = $this->run('log', '-1', $commitId, '--pretty="format:%cd"', '--date=iso-strict');
+            $result = $this->run('log', '-1', $commitId, '--pretty="%ad"', '--date=iso-strict');
 			$committerDate = \DateTimeImmutable::createFromFormat(\DateTime::ATOM, (string) $result->getOutputLastLine());
 
 			if (!($committerDate instanceof \DateTimeImmutable)) {
