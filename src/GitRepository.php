@@ -130,8 +130,11 @@
 		 */
 		public function createBranch($name, $checkout = FALSE)
 		{
-			// git branch $name
-			$this->run('branch', $name);
+            if( !in_array ( $name, $this->getBranches()) )
+            {
+                // git branch $name
+                $this->run('branch', $name);
+            }
 
 			if ($checkout) {
 				$this->checkout($name);
